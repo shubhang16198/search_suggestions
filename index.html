@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<link rel = "stylesheet" type = "text/css" href = "main.css" />
+		<title></title>
+	</head>
+	<body>
+
+		<div id="search-wrapper">
+			<input class="search" placeholder="Enter keywords" type="text" id="search" />
+			<input class="submit" type="submit" value=" " id="submitbutton" />
+			<div id="results" align="center">
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(function() {
+				
+				$("#search").keyup(function() {
+					var keywords = $("#search").val();
+					//$("#results").slideUp('show');
+					if (keywords.length > 0) {
+						var datax = "query="+keywords;
+						$.ajax({
+							type: "GET",
+							url : "search.php",
+							data: datax,
+							cache : false,
+							success: function(data) {
+								$("#results").html(data).show();
+							}
+						});
+					}
+					//return false;
+				});
+				
+			});
+		</script>
+	</body>
+</html>
